@@ -5,17 +5,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import javax.swing.JPanel;
-
 import mino.Block;
 import mino.Lucy;
 import mino.Mino;
 
-public class Board {
-    final int WIDTH = 360;
-    final int HEIGHT = 550;
-
+public class PlayManager {
     //set up the board
+    final int WIDTH = 360;
+    final int HEIGHT = 600;
     public static int left_x;
     public static int right_x;
     public static int top_y;
@@ -26,21 +23,22 @@ public class Board {
     final int MINO_START_X;
     final int MINO_START_Y;
 
-    public Board() {
+    public static int dropInterval = 60;
+
+    public PlayManager() {
         //set the board size
-        left_x = (Window.WIDTH / 2) - (WIDTH / 2);
+        left_x = (GamePanel.WIDTH/2) - (WIDTH/2);
         right_x = left_x + WIDTH;
         top_y = 50;
         bottom_y = top_y + HEIGHT;
 
-        //set the starting position of the mino
-        MINO_START_X = left_x + (WIDTH / 2) - Block.SIZE;
+        //set the starting position of the minos
+        MINO_START_X = left_x + (WIDTH/2) - Block.SIZE;
         MINO_START_Y = top_y + Block.SIZE+12;
 
         //set the starting mino
         currentMino = new Lucy();
         currentMino.setPos(MINO_START_X, MINO_START_Y);
-
     }
 
     public void update() {
