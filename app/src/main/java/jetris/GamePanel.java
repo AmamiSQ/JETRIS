@@ -6,9 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 
 import javax.swing.JPanel;
-import javax.swing.plaf.DimensionUIResource;
 
-public class GamePanel extends JPanel  implements Runnable{
+public class GamePanel extends JPanel implements Runnable{
     //set window properties
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
@@ -21,6 +20,10 @@ public class GamePanel extends JPanel  implements Runnable{
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(Color.BLACK);
         this.setLayout(null);
+
+        //implement the key listener
+        this.addKeyListener(new KeyHandler()); //listens for key presses
+        this.setFocusable(true); //focuses on the panel (keys respond to the panel)
 
         pm = new PlayManager();
     }
@@ -61,7 +64,7 @@ public class GamePanel extends JPanel  implements Runnable{
     public void update() {
         pm.update();
     }
-
+        
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 

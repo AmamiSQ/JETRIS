@@ -23,7 +23,7 @@ public class PlayManager {
     final int MINO_START_X;
     final int MINO_START_Y;
 
-    public static int dropInterval = 60;
+    public static int dropInterval = 60; //drops every 60 frames
 
     public PlayManager() {
         //set the board size

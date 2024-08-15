@@ -14,7 +14,8 @@ public class Lucy extends Mino{
         //   0 0  blocks[2] blocks[3]
         //b[0] is the center (second) block
             //this is done so that the others rotate around it
-    
+        
+        //TODO: optimalize this, can be done better/in a loop
         blocks[0].x = x;
         blocks[0].y = y;
         blocks[1].x = x;
