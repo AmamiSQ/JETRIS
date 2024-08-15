@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 
 public class Window {
     //set window width and height
-    public static final int WIDTH = 320;
-    public static final int HEIGHT = 480;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
 
     //set up a new board and title
     private GamePanel panel;

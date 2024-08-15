@@ -2,6 +2,7 @@ package main.java.jetris;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -9,10 +10,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     final int FPS = 60;
     Thread gameThread;
+    Board board;
     
     public GamePanel() {
         this.setBackground(Color.BLACK);
         this.setLayout(null);
+
+        board = new Board();
     }
 
     public void startJetris() {
@@ -48,11 +52,13 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        board.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        Graphics2D graph = (Graphics2D)g;
+        board.draw(graph);
     }
 }
