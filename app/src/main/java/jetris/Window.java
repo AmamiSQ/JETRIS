@@ -1,4 +1,4 @@
-package jetris.main;
+package jetris;
 
 import javax.swing.JFrame;
 

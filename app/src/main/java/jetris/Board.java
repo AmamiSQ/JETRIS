@@ -1,4 +1,4 @@
-package jetris.main;
+package jetris;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -6,6 +6,10 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
+
+import mino.Block;
+import mino.Lucy;
+import mino.Mino;
 
 public class Board {
     final int WIDTH = 360;
@@ -17,16 +21,30 @@ public class Board {
     public static int top_y;
     public static int bottom_y;
 
+    //Mino
+    Mino currentMino;
+    final int MINO_START_X;
+    final int MINO_START_Y;
+
     public Board() {
         //set the board size
         left_x = (Window.WIDTH / 2) - (WIDTH / 2);
         right_x = left_x + WIDTH;
         top_y = 50;
         bottom_y = top_y + HEIGHT;
+
+        //set the starting position of the mino
+        MINO_START_X = left_x + (WIDTH / 2) - Block.SIZE;
+        MINO_START_Y = top_y + Block.SIZE+12;
+
+        //set the starting mino
+        currentMino = new Lucy();
+        currentMino.setPos(MINO_START_X, MINO_START_Y);
+
     }
 
     public void update() {
-
+        currentMino.update();
     }
 
     //draw the board
@@ -46,5 +64,10 @@ public class Board {
         //set font and draw the text
         graph.setFont(new Font("MS Gothic", Font.PLAIN, 20));
         graph.drawString("次", x+60, y+20);
+
+        //draw the current mino
+        if (currentMino != null) {
+            currentMino.draw(graph);
+        }
     }
 }
