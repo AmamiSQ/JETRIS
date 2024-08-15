@@ -1,7 +1,8 @@
-package main.java.jetris;
+package jetris.main;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
@@ -36,5 +37,14 @@ public class Board {
 
         //draw the board
         graph.drawRect(left_x-4, top_y+8, WIDTH, HEIGHT);
+
+        //draw the next piece box
+        int x = right_x + 100;
+        int y = top_y+8;
+        graph.drawRect(x, y, 150, 150);
+            
+        //set font and draw the text
+        graph.setFont(new Font("MS Gothic", Font.PLAIN, 20));
+        graph.drawString("次", x+60, y+20);
     }
 }

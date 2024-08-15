@@ -1,4 +1,4 @@
-package main.java.jetris;
+package jetris.main;
 
 import java.awt.Color;
 import java.awt.Graphics;
