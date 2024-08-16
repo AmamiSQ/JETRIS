@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 import mino.Block;
 import mino.Ivan;
@@ -33,6 +34,26 @@ public class PlayManager {
     final int PLACEHOLDER_START_X;
     final int PLACEHOLDER_START_Y;
 
+    public Mino randomMino() {
+        Mino choice;
+
+        Random rand = new Random();
+        int numb = rand.nextInt(7);
+
+        switch(numb) {
+            case 0: choice = new Ivan(); break;
+            case 1: choice = new Jared(); break;
+            case 2: choice = new Lucy(); break;
+            case 3: choice = new Olivia(); break;
+            case 4: choice = new Susan(); break;
+            case 5: choice = new Theo(); break;
+            case 6: choice = new Zara(); break;
+            default: choice = new Ivan(); break;
+        }
+
+        return choice;
+    }
+
     public static int dropInterval = 60; //drops every 60 frames
 
     public PlayManager() {
@@ -47,14 +68,14 @@ public class PlayManager {
         MINO_START_Y = top_y + Block.SIZE+12;
 
         //set the starting mino
-        currentMino = new Lucy();
+        currentMino = randomMino();
         currentMino.setPos(MINO_START_X, MINO_START_Y);
         
         //TODO: REMOVE PLACEHOLDERS
         PLACEHOLDER_START_X = right_x + 170;
         PLACEHOLDER_START_Y = top_y + Block.SIZE+40;
 
-        placeholderMino = new Olivia();
+        placeholderMino = randomMino();
         placeholderMino.setPos(PLACEHOLDER_START_X, PLACEHOLDER_START_Y);
     }
 
