@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.Random;
 
 import mino.Block;
@@ -30,9 +31,10 @@ public class PlayManager {
     final int MINO_START_X;
     final int MINO_START_Y;
 
-    Mino placeholderMino;
-    final int PLACEHOLDER_START_X;
-    final int PLACEHOLDER_START_Y;
+    Mino nextMino;
+    final int NEXT_MINO_START_X;
+    final int NEXT_MINO_START_Y;
+    public static ArrayList<Block> staticBlocks = new ArrayList<>();
 
     public Mino randomMino() {
         Mino choice;
@@ -71,16 +73,27 @@ public class PlayManager {
         currentMino = randomMino();
         currentMino.setPos(MINO_START_X, MINO_START_Y);
         
-        //TODO: REMOVE PLACEHOLDERS
-        PLACEHOLDER_START_X = right_x + 170;
-        PLACEHOLDER_START_Y = top_y + Block.SIZE+40;
+        NEXT_MINO_START_X = right_x + 170;
+        NEXT_MINO_START_Y = top_y + Block.SIZE+40;
 
-        placeholderMino = randomMino();
-        placeholderMino.setPos(PLACEHOLDER_START_X, PLACEHOLDER_START_Y);
+        nextMino = randomMino();
+        nextMino.setPos(NEXT_MINO_START_X, NEXT_MINO_START_Y);
     }
 
     public void update() {
-        currentMino.update();
+        if (currentMino.active) {
+            currentMino.update();
+        }
+        else {
+            for(int i = 0; i<currentMino.blocks.length; i++) {
+                staticBlocks.add(currentMino.blocks[i]);
+            }
+
+            currentMino = nextMino;
+            currentMino.setPos(MINO_START_X, MINO_START_Y);
+            nextMino = randomMino();
+            nextMino.setPos(NEXT_MINO_START_X, NEXT_MINO_START_Y);
+        }
     }
 
     //draw the board
@@ -108,8 +121,10 @@ public class PlayManager {
             currentMino.draw(graph);
         }
 
-        if (placeholderMino != null) {
-            placeholderMino.draw(graph);
+        nextMino.draw(graph);
+
+        for (int i = 0; i<staticBlocks.size(); i++) {
+            staticBlocks.get(i).draw(graph);
         }
     }
 }
