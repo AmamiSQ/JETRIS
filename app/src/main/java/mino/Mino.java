@@ -13,6 +13,8 @@ public class Mino {
     public int direction = 1; //1 through 4 available directions
     boolean leftCollision, rightCollision, bottomCollision;
     public boolean active = true;
+    public boolean countdown;
+    public int deactiveCounter = 0;
 
     public void create(Color color) {
         //fill the arrays with empty blocks
@@ -120,8 +122,22 @@ public class Mino {
         }
     }
 
+    public void deactivating() {
+        deactiveCounter++;
+        
+        if (deactiveCounter == 45) {
+            active = false;
+            countdown = false;
+            deactiveCounter = 0;
+            return;
+        }
+    }
 
     public void update() {
+        if (countdown) {
+            deactivating();
+        }
+
         checkMovementCollision();
 
         //move the mino!!
@@ -160,7 +176,7 @@ public class Mino {
         }
 
         if (bottomCollision) {
-            active = false;
+            countdown = true;
         }
         else {
             autoDropCounter++;
