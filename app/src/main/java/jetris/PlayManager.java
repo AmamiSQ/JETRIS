@@ -6,8 +6,14 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import mino.Block;
+import mino.Ivan;
+import mino.Jared;
 import mino.Lucy;
 import mino.Mino;
+import mino.Olivia;
+import mino.Susan;
+import mino.Theo;
+import mino.Zara;
 
 public class PlayManager {
     //set up the board
@@ -22,6 +28,10 @@ public class PlayManager {
     Mino currentMino;
     final int MINO_START_X;
     final int MINO_START_Y;
+
+    Mino placeholderMino;
+    final int PLACEHOLDER_START_X;
+    final int PLACEHOLDER_START_Y;
 
     public static int dropInterval = 60; //drops every 60 frames
 
@@ -39,6 +49,13 @@ public class PlayManager {
         //set the starting mino
         currentMino = new Lucy();
         currentMino.setPos(MINO_START_X, MINO_START_Y);
+        
+        //TODO: REMOVE PLACEHOLDERS
+        PLACEHOLDER_START_X = right_x + 170;
+        PLACEHOLDER_START_Y = top_y + Block.SIZE+40;
+
+        placeholderMino = new Olivia();
+        placeholderMino.setPos(PLACEHOLDER_START_X, PLACEHOLDER_START_Y);
     }
 
     public void update() {
@@ -66,6 +83,10 @@ public class PlayManager {
         //draw the current mino
         if (currentMino != null) {
             currentMino.draw(graph);
+        }
+
+        if (placeholderMino != null) {
+            placeholderMino.draw(graph);
         }
     }
 }
