@@ -85,6 +85,8 @@ public class PlayManager {
 
     //draw the board
     public void draw(Graphics2D graph) {
+        graph.setColor(Color.GREEN);
+        graph.drawLine(left_x, bottom_y, right_x, bottom_y);
         //set color and stroke size
         graph.setColor(Color.WHITE);
         graph.setStroke(new BasicStroke(4f));
