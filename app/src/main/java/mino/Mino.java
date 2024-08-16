@@ -10,6 +10,7 @@ public class Mino {
     public Block blocks[] = new Block[4];
     public Block tempB[] = new Block[4];
     int autoDropCounter = 0;
+    public int direction = 1; //1 through 4 available directions
 
     public void create(Color color) {
         //fill the arrays with empty blocks
@@ -21,10 +22,33 @@ public class Mino {
     }
 
     public void setPos(int x, int y) {};
-    public void updatePos(int x, int y) {};
+    public void updatePos(int direction) {
+        this.direction = direction;
+        
+        //Q: why not store the new positions directly instead of using a temp array?
+        /* A: it's for handling collision. If the block collides when it's rotating, the rotation needs to be cancelled
+                and that can't be done if it's already been updated */
+        for(int i = 0; i<4; i++) {
+            blocks[i].x = tempB[i].x;
+            blocks[i].y = tempB[i].y;
+        }
+    };
+
+    public void getDirection1() {};
+    public void getDirection2() {};
+    public void getDirection3() {};
+    public void getDirection4() {};
+
+
     public void update() {
         //move the mino!!
         if (KeyHandler.upPressed) {
+            switch(direction) {
+                case 1: getDirection2(); break;
+                case 2: getDirection3(); break;
+                case 3: getDirection4(); break;
+                case 4: getDirection1(); break;
+            }
             KeyHandler.upPressed = false;
         }
 
